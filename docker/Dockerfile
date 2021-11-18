@@ -27,6 +27,9 @@ RUN chmod u+x /bootstrap.sh && /bootstrap.sh
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
 COPY config/webserver_config.py ${AIRFLOW_USER_HOME}/webserver_config.py
+COPY requirements.txt.lock ${AIRFLOW_USER_HOME}/requirements.txt.lock
+RUN pip3 install -r ${AIRFLOW_USER_HOME}/requirements.txt.lock
+
 
 RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 RUN chmod +x /entrypoint.sh
